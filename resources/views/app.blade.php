@@ -21,7 +21,7 @@
                     </div>
                     <div class="tab-pane fade" id="nav-emails" role="tabpanel" aria-labelledby="nav-emails-tab">
                         <template v-if="option==2">
-                            <register-emails></register-emails>
+                            <register-emails :current-user='{!! Auth::user()->id  !!}'></register-emails>
                         </template>
                     </div>
                     <div class="tab-pane fade" id="nav-queue" role="tabpanel" aria-labelledby="nav-queue-tab">

@@ -1,50 +1,100 @@
 <template>
-<!-- Header -->
-<div class="animated fadeIn">
-<header class="w3-container w3-red w3-center" style="padding:128px 16px">
-  <h1 class="w3-margin w3-jumbo">Registre emails</h1>
-  <p class="w3-xlarge">Template by w3.css</p>
-  <button class="w3-button w3-black w3-padding-large w3-large w3-margin-top">Get Started</button>
-</header>
+    <div>
+        <form>
+            <br>
+            <div class="form-group">
+                <label for="subject">Asunto</label>
+                <input type="text" class="form-control" id="subject" v-model="email.subject">
+                <br>
+                <span v-if="errors.subject" :class="['alert alert-danger']">@{{ errors.subject[0] }}</span>
 
-<!-- First Grid -->
-<div class="w3-row-padding w3-padding-64 w3-container">
-  <div class="w3-content">
-    <div class="w3-twothird">
-      <h1>Lorem Ipsum</h1>
-      <h5 class="w3-padding-32">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</h5>
+            </div>
+            <div class="form-group">
+                <label for="to">Para</label>
+                <input type="email" class="form-control" id="to" v-model="email.to" placeholder="name@example.com">
+                <br>
+                <span v-if="errors.to" :class="['alert alert-danger']">@{{ errors.to[0] }}</span>
 
-      <p class="w3-text-grey">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-        laboris nisi ut aliquip ex ea commodo consequat.</p>
+            </div>
+            <div class="form-group">
+                <label for="message">Mensaje</label>
+                <textarea class="form-control" id="message" v-model="email.message"></textarea>
+                <br>
+                <span v-if="errors.message" :class="['alert alert-danger']">@{{ errors.message[0] }}</span>
+            </div>
+
+        </form>
+
+        <div class="form-group">
+            <button class="btn btn-info" @click="store()" :disabled="saving">
+                {{ saving ? 'Agregando...' : 'Agregar' }}
+            </button>
+        </div>
+
     </div>
 
-    <div class="w3-third w3-center">
-      <i class="fa fa-anchor w3-padding-64 w3-text-red"></i>
-    </div>
-  </div>
-</div>
-
-<!-- Second Grid -->
-<div class="w3-row-padding w3-light-grey w3-padding-64 w3-container">
-  <div class="w3-content">
-    <div class="w3-third w3-center">
-      <i class="fa fa-coffee w3-padding-64 w3-text-red w3-margin-right"></i>
-    </div>
-
-    <div class="w3-twothird">
-      <h1>Lorem Ipsum</h1>
-      <h5 class="w3-padding-32">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</h5>
-
-      <p class="w3-text-grey">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-        laboris nisi ut aliquip ex ea commodo consequat.</p>
-    </div>
-  </div>
-</div>
-
-<div class="w3-container w3-black w3-center w3-opacity w3-padding-64">
-    <h1 class="w3-margin w3-xlarge">Quote of the day: live life</h1>
-</div>
-</div>
 </template>
+
+<script>
+    import Toasted from 'vue-toasted';
+
+    Vue.use(Toasted);
+
+    const props = {
+
+        currentUser: {
+            type: Number,
+            required: true
+        }
+
+    }
+    export default {
+
+        props: props,
+
+        data() {
+            return {
+                countries: [],
+                cities: [],
+                municipalities: [],
+                saving: false,
+                message: false,
+                email: {
+                    user_id: this.currentUser,
+                    subject: '',
+                    to: '',
+                    message: ''
+                },
+                errors: [],
+                errors_exist: false
+            };
+        },
+        created() {
+        },
+        methods: {
+
+            store() {
+                this.saving = true;
+                this.message = false;
+                this.$http.post('/api/emails', this.email).then(response => {
+                    this.$toasted.show('Email Agregado a Cola de Emails!', {
+                        type: 'success'
+                    }).goAway(1500);
+                    this.email.subject = '';
+                    this.email.to = '';
+                    this.email.message = '';
+                    this.errors = [];
+
+                })
+                        .catch((e) => {
+                            this.errors_exist = true;
+                            this.errors = e.response.data.errors;
+//                            if (error.response.status === 422) {
+//                            }
+//                            this.message = e.response.data.message || 'There was an issue creating the user.';
+                        })
+                        .then(() => this.saving = false);
+            }
+        }
+    }
+</script>

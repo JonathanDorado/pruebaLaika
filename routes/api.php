@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 Route::group(['namespace' => 'Api'], function () {
     
     Route::post('/users', 'UsersController@store');
+    Route::post('/emails', 'EmailsController@store');
     
     
 

@@ -1829,6 +1829,111 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/RegisterEmails.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/RegisterEmails.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue_toasted__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-toasted */ "./node_modules/vue-toasted/dist/vue-toasted.min.js");
+/* harmony import */ var vue_toasted__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_toasted__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+Vue.use(vue_toasted__WEBPACK_IMPORTED_MODULE_0___default.a);
+var props = {
+  currentUser: {
+    type: Number,
+    required: true
+  }
+};
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: props,
+  data: function data() {
+    return {
+      countries: [],
+      cities: [],
+      municipalities: [],
+      saving: false,
+      message: false,
+      email: {
+        user_id: this.currentUser,
+        subject: '',
+        to: '',
+        message: ''
+      },
+      errors: [],
+      errors_exist: false
+    };
+  },
+  created: function created() {},
+  methods: {
+    store: function store() {
+      var _this = this;
+
+      this.saving = true;
+      this.message = false;
+      this.$http.post('/api/emails', this.email).then(function (response) {
+        _this.$toasted.show('Email Agregado a Cola de Emails!', {
+          type: 'success'
+        }).goAway(1500);
+
+        _this.email.subject = '';
+        _this.email.to = '';
+        _this.email.message = '';
+        _this.errors = [];
+      })["catch"](function (e) {
+        _this.errors_exist = true;
+        _this.errors = e.response.data.errors; //                            if (error.response.status === 422) {
+        //                            }
+        //                            this.message = e.response.data.message || 'There was an issue creating the user.';
+      }).then(function () {
+        return _this.saving = false;
+      });
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/RegisterUsers.vue?vue&type=script&lang=js&":
 /*!************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/RegisterUsers.vue?vue&type=script&lang=js& ***!
@@ -2641,110 +2746,137 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "animated fadeIn" }, [
-      _c(
-        "header",
-        {
-          staticClass: "w3-container w3-red w3-center",
-          staticStyle: { padding: "128px 16px" }
-        },
-        [
-          _c("h1", { staticClass: "w3-margin w3-jumbo" }, [
-            _vm._v("Registre emails")
-          ]),
-          _vm._v(" "),
-          _c("p", { staticClass: "w3-xlarge" }, [_vm._v("Template by w3.css")]),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass:
-                "w3-button w3-black w3-padding-large w3-large w3-margin-top"
-            },
-            [_vm._v("Get Started")]
-          )
-        ]
-      ),
+  return _c("div", [
+    _c("form", [
+      _c("br"),
       _vm._v(" "),
-      _c("div", { staticClass: "w3-row-padding w3-padding-64 w3-container" }, [
-        _c("div", { staticClass: "w3-content" }, [
-          _c("div", { staticClass: "w3-twothird" }, [
-            _c("h1", [_vm._v("Lorem Ipsum")]),
-            _vm._v(" "),
-            _c("h5", { staticClass: "w3-padding-32" }, [
-              _vm._v(
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-              )
-            ]),
-            _vm._v(" "),
-            _c("p", { staticClass: "w3-text-grey" }, [
-              _vm._v(
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint\n        occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco\n        laboris nisi ut aliquip ex ea commodo consequat."
-              )
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "subject" } }, [_vm._v("Asunto")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.email.subject,
+              expression: "email.subject"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { type: "text", id: "subject" },
+          domProps: { value: _vm.email.subject },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.email, "subject", $event.target.value)
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c("br"),
+        _vm._v(" "),
+        _vm.errors.subject
+          ? _c("span", { class: ["alert alert-danger"] }, [
+              _vm._v("@" + _vm._s(_vm.errors.subject[0]))
             ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "w3-third w3-center" }, [
-            _c("i", { staticClass: "fa fa-anchor w3-padding-64 w3-text-red" })
-          ])
-        ])
+          : _vm._e()
       ]),
       _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass: "w3-row-padding w3-light-grey w3-padding-64 w3-container"
-        },
-        [
-          _c("div", { staticClass: "w3-content" }, [
-            _c("div", { staticClass: "w3-third w3-center" }, [
-              _c("i", {
-                staticClass:
-                  "fa fa-coffee w3-padding-64 w3-text-red w3-margin-right"
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "w3-twothird" }, [
-              _c("h1", [_vm._v("Lorem Ipsum")]),
-              _vm._v(" "),
-              _c("h5", { staticClass: "w3-padding-32" }, [
-                _vm._v(
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-                )
-              ]),
-              _vm._v(" "),
-              _c("p", { staticClass: "w3-text-grey" }, [
-                _vm._v(
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint\n        occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco\n        laboris nisi ut aliquip ex ea commodo consequat."
-                )
-              ])
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "to" } }, [_vm._v("Para")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.email.to,
+              expression: "email.to"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { type: "email", id: "to", placeholder: "name@example.com" },
+          domProps: { value: _vm.email.to },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.email, "to", $event.target.value)
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c("br"),
+        _vm._v(" "),
+        _vm.errors.to
+          ? _c("span", { class: ["alert alert-danger"] }, [
+              _vm._v("@" + _vm._s(_vm.errors.to[0]))
             ])
-          ])
-        ]
-      ),
+          : _vm._e()
+      ]),
       _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "message" } }, [_vm._v("Mensaje")]),
+        _vm._v(" "),
+        _c("textarea", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.email.message,
+              expression: "email.message"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { id: "message" },
+          domProps: { value: _vm.email.message },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.email, "message", $event.target.value)
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c("br"),
+        _vm._v(" "),
+        _vm.errors.message
+          ? _c("span", { class: ["alert alert-danger"] }, [
+              _vm._v("@" + _vm._s(_vm.errors.message[0]))
+            ])
+          : _vm._e()
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group" }, [
       _c(
-        "div",
+        "button",
         {
-          staticClass:
-            "w3-container w3-black w3-center w3-opacity w3-padding-64"
+          staticClass: "btn btn-info",
+          attrs: { disabled: _vm.saving },
+          on: {
+            click: function($event) {
+              return _vm.store()
+            }
+          }
         },
         [
-          _c("h1", { staticClass: "w3-margin w3-xlarge" }, [
-            _vm._v("Quote of the day: live life")
-          ])
+          _vm._v(
+            "\n            " +
+              _vm._s(_vm.saving ? "Agregando..." : "Agregar") +
+              "\n        "
+          )
         ]
       )
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -15293,15 +15425,17 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _RegisterEmails_vue_vue_type_template_id_72a029f6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./RegisterEmails.vue?vue&type=template&id=72a029f6& */ "./resources/js/components/RegisterEmails.vue?vue&type=template&id=72a029f6&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _RegisterEmails_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RegisterEmails.vue?vue&type=script&lang=js& */ "./resources/js/components/RegisterEmails.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
-var script = {}
+
+
 
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
-  script,
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _RegisterEmails_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _RegisterEmails_vue_vue_type_template_id_72a029f6___WEBPACK_IMPORTED_MODULE_0__["render"],
   _RegisterEmails_vue_vue_type_template_id_72a029f6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
@@ -15315,6 +15449,20 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 if (false) { var api; }
 component.options.__file = "resources/js/components/RegisterEmails.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/RegisterEmails.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/components/RegisterEmails.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RegisterEmails_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./RegisterEmails.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/RegisterEmails.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RegisterEmails_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
