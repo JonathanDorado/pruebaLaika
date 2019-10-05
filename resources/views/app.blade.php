@@ -26,7 +26,7 @@
                     </div>
                     <div class="tab-pane fade" id="nav-queue" role="tabpanel" aria-labelledby="nav-queue-tab">
                         <template v-if="option==3">
-                            <queue></queue>
+                            <queue :current-user='{!! Auth::user()->id  !!}'></queue>
                         </template>
                     </div>
                 </div>

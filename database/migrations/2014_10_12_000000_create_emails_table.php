@@ -19,6 +19,7 @@ class CreateEmailsTable extends Migration
             $table->string('subject');
             $table->string('to');
             $table->string('message');  
+            $table->integer('state_id');  
             $table->timestamps();
         });
     }

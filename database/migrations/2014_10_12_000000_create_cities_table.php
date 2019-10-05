@@ -19,6 +19,14 @@ class CreateCitiesTable extends Migration
             $table->string('country_code');
             $table->timestamps();
         });
+        
+        DB::table('cities')->insert(array('name' => 'Cundinamarca', 'country_code' => 'CO'));
+        DB::table('cities')->insert(array('name' => 'Antioquía', 'country_code' => 'CO'));
+        DB::table('cities')->insert(array('name' => 'Atlántico', 'country_code' => 'CO'));
+        DB::table('cities')->insert(array('name' => 'Ciudad Brasil 1', 'country_code' => 'BR'));
+        DB::table('cities')->insert(array('name' => 'Ciudad Brasil 2', 'country_code' => 'BR'));
+        DB::table('cities')->insert(array('name' => 'Ciudad Argentina 1', 'country_code' => 'AR'));
+        DB::table('cities')->insert(array('name' => 'Ciudad Argentina 2', 'country_code' => 'AR'));
     }
 
     /**

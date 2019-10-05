@@ -3,16 +3,16 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Cities;
+use App\Emails;
 
-class Municipalities extends Model {
+class States extends Model {
 
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'municipalities';
+    protected $table = 'states';
 
     /**
      * The attributes that are mass assignable.
@@ -20,13 +20,11 @@ class Municipalities extends Model {
      * @var array
      */
     protected $fillable = [
-        'name',
-        'city_id'
+        'name'
     ];
     
-     public function municipality()
-    {
-        return $this->belongsTo(Cities::class);
+    public function emails(){
+        return $this->hasMany(Emails::class);
     }
 
 }

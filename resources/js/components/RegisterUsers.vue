@@ -45,7 +45,7 @@
                     </option>
                 </select>
                 <br>
-                <span v-if="errors.municipality_id" :class="['alert alert-danger']">@{{ errors.municipality_id[0] }}</span>
+                <span v-if="errors.municipality" :class="['alert alert-danger']">@{{ errors.municipality[0] }}</span>
             </div>
 
             <div class="form-group">
@@ -58,7 +58,7 @@
         </form>
 
         <div class="form-group">
-            <button class="btn btn-info" @click="store()" :disabled="saving">
+            <button class="btn btn-primary" @click="store()" :disabled="saving">
                 {{ saving ? 'Creando...' : 'Crear' }}
             </button>
         </div>

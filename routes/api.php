@@ -16,10 +16,11 @@ use Illuminate\Http\Request;
 Route::group(['namespace' => 'Api'], function () {
     
     Route::post('/users', 'UsersController@store');
+    
     Route::post('/emails', 'EmailsController@store');
+    Route::get('/emails/{user_id}', 'EmailsController@show');
+    Route::put('/emails/{user_id}', 'EmailsController@update');
     
-    
-
     Route::group(['prefix' => 'countries'], function () {
         Route::get('/', 'CountriesController@index');
     });

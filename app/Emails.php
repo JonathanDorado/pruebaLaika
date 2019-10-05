@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\States;
 
 class Emails extends Model {
 
@@ -25,5 +26,10 @@ class Emails extends Model {
         'message',
         'state_id'
     ];
+    
+    public function state()
+    {
+        return $this->belongsTo(States::class);
+    }
 
 }

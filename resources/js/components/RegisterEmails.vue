@@ -26,7 +26,7 @@
         </form>
 
         <div class="form-group">
-            <button class="btn btn-info" @click="store()" :disabled="saving">
+            <button class="btn btn-primary" @click="store()" :disabled="saving">
                 {{ saving ? 'Agregando...' : 'Agregar' }}
             </button>
         </div>
@@ -94,7 +94,7 @@
 //                            this.message = e.response.data.message || 'There was an issue creating the user.';
                         })
                         .then(() => this.saving = false);
-            }
+            },
         }
     }
 </script>

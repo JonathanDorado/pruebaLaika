@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Cities;
 
 class Countries extends Model {
 
@@ -22,5 +23,9 @@ class Countries extends Model {
         'name',
         'country_code'
     ];
+
+    public function cities() {
+        return $this->hasMany(Cities::class, 'country_code');
+    }
 
 }

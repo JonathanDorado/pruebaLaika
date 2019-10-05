@@ -27,4 +27,18 @@ class EmailsController extends Controller {
         ]);
     }
 
+    public function show($user_id) {
+        $emails = \App\Emails::where('user_id', '=', $user_id)->orderBy('created_at', 'desc')
+                ->with(['state']);
+        echo json_encode($emails->get());
+    }
+
+    public function update($user_id) {
+
+        //Codigo para enviar emails
+        
+        $emails = \App\Emails::where('user_id', $user_id)->update(['state_id' => 2]);
+        echo json_encode($emails);
+    }
+
 }
